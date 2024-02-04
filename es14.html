@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <title>Valentine</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            text-align: center;
+        }
+        h1 {
+            color: lightpink;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 50px; 
+            margin-top: 50px;
+        }
+        #btnOui, #btnNo {
+            background-color: lightgreen;
+            height: 70px;
+            width: 100px;
+        }
+        #btnNo {
+            background-color: #ec5252;
+            height: 70px; 
+            padding: 0 20px; 
+             
+        }
+        .cuore {
+            width: 30px;
+            height: 30px;
+            background-image: url('https://media.tenor.com/BIyhzxwbFSoAAAAi/pink-cuore-pink.gif'); 
+            background-size: cover;
+            position: absolute;
+            opacity: 0; 
+            transform: scale(0.5); 
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnOui").click(cambiaImm);
+            $("#btnNo").click(cambiaImm2);
+        });
+
+        function cambiaImm() {
+            $("#milkbear").attr("src", "https://media.tenor.com/sFStC1YwBzMAAAAi/milk-and-mocha-hug.gif");
+            
+            for (let i = 0; i < 5; i++) {
+        var cuore = $('<div class="cuore"></div>');
+        $('body').append(cuore);
+
+        
+        var x = Math.random() * $(window).width();
+        var y = Math.random() * $(window).height();
+
+        cuore.css({
+            left: x,
+            top: y,
+            opacity: 1, 
+            width: '30px', 
+            height: '30px', 
+            position: 'absolute', 
+        });
+
+        
+        setTimeout(function() {
+            cuore.remove();
+        }, 2000); 
+    }
+
+            for (let i = 0; i < 20; i++) {
+                var cuore = $('<div class="cuore"></div>');
+                var x = $("#btnOui").offset().left + ($("#btnOui").width() / 2);
+                var y = $("#btnOui").offset().top + ($("#btnOui").height() / 2);
+                cuore.css({
+                    left: x,
+                    top: y,
+                    opacity: 1, 
+                });
+                $('body').append(cuore);
+                animatecuore(cuore);
+            }
+        }
+        
+        function cambiaImm2() {
+            var altezza = parseInt($("#btnOui").css("height")) + 10;
+            var larghezza = parseInt($("#btnOui").css("width")) + 10;
+            $("#btnOui").css({"height": altezza + "px", "width": larghezza + "px"});
+
+            cambiaTestoEFont();
+        }
+
+        function animatecuore(cuore) {
+            var xEnd = Math.random() * $(window).width();
+            var yEnd = Math.random() * $(window).height();
+            var size = Math.random() * 1.5 + 0.5; 
+            cuore.animate({
+                left: xEnd,
+                top: yEnd,
+                opacity: 0,
+                transform: 'scale(' + size + ')'
+            }, 2000, function() {
+                $(this).remove(); 
+            });
+        }
+
+        function cambiaTestoEFont() {
+            var btnNo = $("#btnNo");
+            var testi = ["No :(", "Are you sure? :(", "think about it :(", "there are a lot of benefits :(", "please ;)", "are still refusing? :(", "work in progress"];
+            var testoCorrente = btnNo.text();
+            var indiceTesto = testi.indexOf(testoCorrente);
+            var prossimoTesto = testi[(indiceTesto + 1) % testi.length];
+            btnNo.text(prossimoTesto);
+
+            
+            var lunghezzaTesto = prossimoTesto.length;
+            if (lunghezzaTesto < 10) {
+                btnNo.css('font-size', '16px');
+            } else if (lunghezzaTesto < 20) {
+                btnNo.css('font-size', '14px');
+            } else if (lunghezzaTesto < 30) {
+                btnNo.css('font-size', '12px');
+            } else {
+                btnNo.css('font-size', '10px');
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+    <h1>Dou you wanna be my valentine? <3</h1>
+    <img src="https://media1.tenor.com/m/kS2IYOV7-wEAAAAC/milk-and-mocha.gif" alt="milkbear" height="150px" id="milkbear">
+    <div class="button-container">
+        <div id="si">
+            <button id="btnOui" class="btn btn-success">Yes <3</button>
+        </div>
+        <div id="no">
+            <button id="btnNo" class="btn btn-danger ">No :(</button>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
